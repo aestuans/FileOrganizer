@@ -40,7 +40,7 @@
             <TextBlock Text="Files:" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="0" Width="36"/>
             <TextBlock x:Name="TextBlock_NumFiles" Text="0"  Margin="35,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" Width="27" Grid.Column="0"/>
             <TextBlock Text="Processing:" Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="2" />
-            <TextBlock x:Name="TextBlock_ProcessingIndex" Text="--" Margin="70,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" Width="27" Grid.Column="1"/>
+            <TextBlock x:Name="TextBlock_ProcessingIndex" Text="--" Margin="70,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" Width="37" Grid.Column="1"/>
         </Grid>
 
         <Grid Height="20" Width="188" Margin="0,0,10,0" HorizontalAlignment="Right" VerticalAlignment="Center">
