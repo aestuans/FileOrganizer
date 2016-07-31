@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:FileOrganizer"
         mc:Ignorable="d"
         KeyDown="onKeyDownHandler"
-        Title="Working Title" Height="110" Width="610" >
+        Title="FileOrganizer" Height="110" Width="610" >
 
     <Window.Resources>
         <local:BoolToStringConverter x:Key="BoolToStringConverter" />
