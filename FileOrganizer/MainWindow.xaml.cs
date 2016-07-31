@@ -23,16 +23,21 @@ namespace FileOrganizer
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-
-
     public partial class MainWindow : Window
     {
+        // List of target directories
         private string[] gtargetDirectory;
-
-        public static int count;
+        // This array will contain TextBlocks than indicate target folder names in the UI
         private TextBlock[] folderArray;
+        // This array will contain the TextBlocks that contain numbers for the above
         private TextBlock[] numberArray;
+        // Indicates the number of files currently being moved in the background
         private int numMoving = 0;
+
+        // The set of formats the app will attempt to open and organize.
+        // This is to avoid oppening executables, batch files an the like.
+        // The following is just written for my personal convenience.
+        // TODO: Probably a good idea to import these from a seperate file so that the user can change it at will.
         public HashSet<string> acceptedformats = new HashSet<string>
         {
             ".jpg", ".jpeg", ".gif", ".png", ".bmp", ".gifv", ".svg",
@@ -42,8 +47,9 @@ namespace FileOrganizer
             ".c", ".cpp", ".py",
             ".7z", ".rar"
         };
-        //public static bool gstopped = true;
 
+        // The property isStopped is true if the program is stopped. This is binded to the content of StartStop button
+        // using a boolean to string converter.
         public static readonly DependencyProperty isStoppedProperty =
             DependencyProperty.Register("isStopped", typeof(bool), typeof(MainWindow));
         public bool isStopped
