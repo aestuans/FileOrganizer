@@ -54,6 +54,8 @@ namespace FileOrganizer
             }
             catch (Exception e)
             {
+                // if the process wasn't able to start, stop the program.
+                // The progress won't be removed, if the user clicks start, it will try to open the same process again.
                 MainWindow.appStop();
                 return;
             }
