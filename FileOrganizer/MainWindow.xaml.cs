@@ -33,6 +33,7 @@ namespace FileOrganizer
         private TextBlock[] numberArray;
         // Indicates the number of files currently being moved in the background
         private int numMoving = 0;
+        System.Diagnostics.Stopwatch stopWatch = new System.Diagnostics.Stopwatch();
 
         // The set of formats the app will attempt to open and organize.
         // This is to avoid oppening executables, batch files an the like.
@@ -47,9 +48,8 @@ namespace FileOrganizer
             ".c", ".cpp", ".py",
             ".7z", ".rar"
         };
-
-        // The property isStopped is true if the program is stopped. This is binded to the content of StartStop button
-        // using a boolean to string converter.
+        // The property isStopped is true if the program is stopped (you didn't see that one coming did you?). 
+        // This is binded to the content of StartStop button using a boolean to string converter.
         public static readonly DependencyProperty isStoppedProperty =
             DependencyProperty.Register("isStopped", typeof(bool), typeof(MainWindow));
         public bool isStopped
@@ -65,9 +65,7 @@ namespace FileOrganizer
             TextBlock[] _numberArray = { Num_1, Num_2, Num_3, Num_4, Num_5, Num_6, Num_7, Num_8, Num_9 };
             folderArray = _folderArray;
             numberArray = _numberArray;
-            stopWatch = new System.Diagnostics.Stopwatch();
         }
-        System.Diagnostics.Stopwatch stopWatch;
         private void moveFile(string source, string target)
         {
             if (File.Exists(source))
@@ -92,7 +90,7 @@ namespace FileOrganizer
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message.ToString(), "Error", MessageBoxButton.OK);
+                MessageBox.Show(e.Message.ToString(), "Error in moving process", MessageBoxButton.OK);
                 appStop();
             }
             numMoving--;
@@ -101,6 +99,8 @@ namespace FileOrganizer
         }
         private void onKeyDownHandler(object sender, KeyEventArgs e)
         {
+            // This is to avoid moving two files unintentionally.
+            // once a keystroke recieved, it won't accept another one for 500ms.
             if (stopWatch.IsRunning)
             {
                 if (stopWatch.ElapsedMilliseconds < 500)
@@ -120,6 +120,7 @@ namespace FileOrganizer
                     (e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9) ||
                     (e.Key >= Key.D0 && e.Key <= Key.D9))
                 {
+                    // Animation for when a folder is chosen.
                     SolidColorBrush animatedBrush = new SolidColorBrush(Colors.Aqua);
                     NameScope.SetNameScope(this, new NameScope());
                     this.RegisterName("animatedBrush", animatedBrush);
