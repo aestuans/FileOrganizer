@@ -230,7 +230,7 @@ namespace FileOrganizer
                 for (int i = 0; i < fileInfo.Length; i++)
                 {
                     string _file = fileInfo[i].FullName;
-                    string extention = System.IO.Path.GetExtension(_file);
+                    string extention = System.IO.Path.GetExtension(_file).ToLower();
                     if (acceptedformats.Contains(extention) && !fileInfo[i].Attributes.HasFlag(FileAttributes.Hidden))
                         fileEntries.Add(_file);
                 }
