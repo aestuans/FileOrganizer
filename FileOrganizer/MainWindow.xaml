@@ -53,7 +53,7 @@
             <TextBlock x:Name="TextBox_Copying" Text="0 Files" Margin="83,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="0"/>
         </Grid>
 
-        <Grid x:Name="Folder_Grid" Margin="0,0,200,0" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+        <Grid x:Name="Folder_Grid" Margin="0,0,200,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" SizeChanged="Folder_Grid_SizeChanged" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" MaxWidth="100" />
                 <ColumnDefinition Width="Auto" MaxWidth="100"/>

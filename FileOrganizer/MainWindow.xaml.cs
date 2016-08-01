@@ -31,6 +31,7 @@ namespace FileOrganizer
         private TextBlock[] folderArray;
         // This array will contain the TextBlocks that contain numbers for the above
         private TextBlock[] numberArray;
+        private Rectangle[] rectangleArray;
         // Indicates the number of files currently being moved in the background
         private int numMoving = 0;
         System.Diagnostics.Stopwatch stopWatch = new System.Diagnostics.Stopwatch();
@@ -43,7 +44,7 @@ namespace FileOrganizer
         {
             ".jpg", ".jpeg", ".gif", ".png", ".bmp", ".gifv", ".svg",
             ".mp3", ".m4a", ".ogg", ".flac", ".aac", ".wav", ".wma",
-            ".pdf", ".djv", ".djvu", ".xls", ".xlsx", ".htm", ".html", ".mht", ".mhtml", ".xhtml", ".txt", ".ppt", ".pptx", ".doc", ".docx",
+            ".pdf", ".djv", ".djvu", ".xls", ".xlsx", ".htm", ".html", ".mht", ".mhtml", ".xhtml", ".txt", ".ppt", ".pptx", ".doc", ".docx", ".srt",
             ".3gp", ".avi", ".divx", ".mov", ".mp4", ".mpg", ".mpeg4", ".wmv", ".flv", ".webm", ".mkv",
             ".c", ".cpp", ".py",
             ".7z", ".rar"
@@ -63,8 +64,10 @@ namespace FileOrganizer
             isStopped = true;
             TextBlock[] _folderArray = { Folder_1, Folder_2, Folder_3, Folder_4, Folder_5, Folder_6, Folder_7, Folder_8, Folder_9 };
             TextBlock[] _numberArray = { Num_1, Num_2, Num_3, Num_4, Num_5, Num_6, Num_7, Num_8, Num_9 };
+            Rectangle[] _rectangleArray = { Rectangle_1, Rectangle_2, Rectangle_3, Rectangle_4, Rectangle_5, Rectangle_6, Rectangle_7, Rectangle_8, Rectangle_9 };
             folderArray = _folderArray;
             numberArray = _numberArray;
+            rectangleArray = _rectangleArray;
         }
         private void moveFile(string source, string target)
         {
@@ -264,7 +267,10 @@ namespace FileOrganizer
                         numberArray[i].Text = "";
                     }
                 }
+                
+                
             }
+            //Console.WriteLine(Folder_Grid.RenderSize);
         }
 
         private void button_StartStop_Click(object sender, RoutedEventArgs e)
@@ -298,6 +304,19 @@ namespace FileOrganizer
         public static void updateProcessingIndex(string s)
         {
             ((MainWindow)Application.Current.MainWindow).TextBlock_ProcessingIndex.Text = s;
+        }
+
+        private void Folder_Grid_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            if (e.NewSize.Width > 400)
+            {
+                if (e.NewSize.Width < System.Windows.SystemParameters.PrimaryScreenWidth - 300)
+                    Application.Current.MainWindow.Width = e.NewSize.Width + 210;
+                else
+                    Application.Current.MainWindow.Width = System.Windows.SystemParameters.PrimaryScreenWidth - 100;
+            }
+            else
+                Application.Current.MainWindow.Width = 610;
         }
     }
 
