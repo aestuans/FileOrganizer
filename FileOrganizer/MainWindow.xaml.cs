@@ -87,6 +87,15 @@ namespace FileOrganizer
             Tuple<string, string> t = (Tuple<string, string>)data;
             string source = t.Item1;
             string target = t.Item2;
+            int postfix = 2;
+            string newTarget = target;
+            while (File.Exists(newTarget))
+            {
+                newTarget = System.IO.Path.GetDirectoryName(target)+ "\\" + System.IO.Path.GetFileNameWithoutExtension(target) +
+                    "(" + postfix.ToString() + ")" + System.IO.Path.GetExtension(target);
+                postfix++;
+            }
+            target = newTarget;
             try
             {
                 File.Move(source, target);
@@ -267,10 +276,7 @@ namespace FileOrganizer
                         numberArray[i].Text = "";
                     }
                 }
-                
-                
             }
-            //Console.WriteLine(Folder_Grid.RenderSize);
         }
 
         private void button_StartStop_Click(object sender, RoutedEventArgs e)
@@ -311,7 +317,7 @@ namespace FileOrganizer
             if (e.NewSize.Width > 400)
             {
                 if (e.NewSize.Width < System.Windows.SystemParameters.PrimaryScreenWidth - 300)
-                    Application.Current.MainWindow.Width = e.NewSize.Width + 210;
+                    Application.Current.MainWindow.Width = e.NewSize.Width + 220;
                 else
                     Application.Current.MainWindow.Width = System.Windows.SystemParameters.PrimaryScreenWidth - 100;
             }
