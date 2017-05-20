@@ -74,11 +74,20 @@ namespace FileOrganizer
             if (File.Exists(source))
             {
                 Tuple<string, string> t = new Tuple<string, string>(source, target);
-                Thread moveThread = new Thread(new ParameterizedThreadStart(moveFileInNewThred));
+                Thread moveThread = new Thread(new ParameterizedThreadStart(moveFileInNewThread));
                 moveThread.Start(t);
             }
         }
-        private void moveFileInNewThred(object data)
+
+        private void deleteFile(string source)
+        {
+            if (File.Exists(source))
+            {
+                Thread moveThread = new Thread(new ParameterizedThreadStart(deleteFileInNewThread));
+                moveThread.Start(source);
+            }
+        }
+        private void moveFileInNewThread(object data)
         {
             numMoving++;
             Application.Current.Dispatcher.Invoke(
@@ -109,6 +118,20 @@ namespace FileOrganizer
             Application.Current.Dispatcher.Invoke(
                 new Action(() => { TextBox_Copying.Text = numMoving.ToString() + " Files"; }));
         }
+        
+        private void deleteFileInNewThread(Object data)
+        {
+            String source = (String)data;
+            try
+            {
+                File.Delete(source);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message.ToString(), "Error in deleting process", MessageBoxButton.OK);
+                appStop();
+            }
+        }
         private void onKeyDownHandler(object sender, KeyEventArgs e)
         {
             // This is to avoid moving two files unintentionally.
@@ -128,12 +151,10 @@ namespace FileOrganizer
 
             if (!isStopped)
             {
-                if (e.Key == Key.Add ||
+                if (e.Key == Key.Add || e.Key == Key.OemPlus ||
                     (e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9) ||
                     (e.Key >= Key.D0 && e.Key <= Key.D9))
                 {
-                    Console.Write("BAAAAAAAAAAAAAAAAAAAAA\n");
-                    Console.Write(e.Key.ToString());
                     // Animation for when a folder is chosen.
                     SolidColorBrush animatedBrush = new SolidColorBrush(Colors.Aqua);
                     NameScope.SetNameScope(this, new NameScope());
@@ -162,7 +183,7 @@ namespace FileOrganizer
                         storyBoard.Children.Add(redColorAnimation);
                         Rectangle_DEL.Fill = animatedBrush;
                         storyBoard.Begin(this);
-                        File.Delete(currentFilePath);
+                        deleteFile(currentFilePath);
                     }
                     else if ((e.Key == Key.NumPad1) || (e.Key == Key.D1) && gtargetDirectory.Length > 0)
                     {
