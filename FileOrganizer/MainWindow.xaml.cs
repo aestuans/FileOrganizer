@@ -132,6 +132,8 @@ namespace FileOrganizer
                     (e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9) ||
                     (e.Key >= Key.D0 && e.Key <= Key.D9))
                 {
+                    Console.Write("BAAAAAAAAAAAAAAAAAAAAA\n");
+                    Console.Write(e.Key.ToString());
                     // Animation for when a folder is chosen.
                     SolidColorBrush animatedBrush = new SolidColorBrush(Colors.Aqua);
                     NameScope.SetNameScope(this, new NameScope());
@@ -153,7 +155,7 @@ namespace FileOrganizer
                     string currentFilePath = FileProcessor.currentFile;
                     string currentFileName = System.IO.Path.GetFileName(currentFilePath);
 
-                    if (e.Key == Key.NumPad0)
+                    if ((e.Key == Key.NumPad0) || (e.Key == Key.D0))
                     {
                         animatedBrush.Color = Colors.Orange;
                         storyBoard.Children.Clear();
@@ -162,55 +164,55 @@ namespace FileOrganizer
                         storyBoard.Begin(this);
                         File.Delete(currentFilePath);
                     }
-                    else if (e.Key == Key.NumPad1 && gtargetDirectory.Length > 0)
+                    else if ((e.Key == Key.NumPad1) || (e.Key == Key.D1) && gtargetDirectory.Length > 0)
                     {
                         Rectangle_1.Fill = animatedBrush;
                         storyBoard.Begin(this);
                         moveFile(currentFilePath, gtargetDirectory[0] + "\\" + currentFileName);
                     }
-                    else if (e.Key == Key.NumPad2 && gtargetDirectory.Length > 1)
+                    else if ((e.Key == Key.NumPad2) || (e.Key == Key.D2) && gtargetDirectory.Length > 1)
                     {
                         Rectangle_2.Fill = animatedBrush;
                         storyBoard.Begin(this);
                         moveFile(currentFilePath, gtargetDirectory[1] + "\\" + currentFileName);
                     }
-                    else if (e.Key == Key.NumPad3 && gtargetDirectory.Length > 2)
+                    else if ((e.Key == Key.NumPad3) || (e.Key == Key.D3) && gtargetDirectory.Length > 2)
                     {
                         Rectangle_3.Fill = animatedBrush;
                         storyBoard.Begin(this);
                         moveFile(currentFilePath, gtargetDirectory[2] + "\\" + currentFileName);
                     }
-                    else if (e.Key == Key.NumPad4 && gtargetDirectory.Length > 3)
+                    else if ((e.Key == Key.NumPad4) || (e.Key == Key.D4) && gtargetDirectory.Length > 3)
                     {
                         Rectangle_4.Fill = animatedBrush;
                         storyBoard.Begin(this);
                         moveFile(currentFilePath, gtargetDirectory[3] + "\\" + currentFileName);
                     }
-                    else if (e.Key == Key.NumPad5 && gtargetDirectory.Length > 4)
+                    else if ((e.Key == Key.NumPad5) || (e.Key == Key.D5) && gtargetDirectory.Length > 4)
                     {
                         Rectangle_5.Fill = animatedBrush;
                         storyBoard.Begin(this);
                         moveFile(currentFilePath, gtargetDirectory[4] + "\\" + currentFileName);
                     }
-                    else if (e.Key == Key.NumPad6 && gtargetDirectory.Length > 5)
+                    else if ((e.Key == Key.NumPad6) || (e.Key == Key.D6) && gtargetDirectory.Length > 5)
                     {
                         Rectangle_6.Fill = animatedBrush;
                         storyBoard.Begin(this);
                         moveFile(currentFilePath, gtargetDirectory[5] + "\\" + currentFileName);
                     }
-                    else if (e.Key == Key.NumPad7 && gtargetDirectory.Length > 6)
+                    else if ((e.Key == Key.NumPad7) || (e.Key == Key.D7) && gtargetDirectory.Length > 6)
                     {
                         Rectangle_7.Fill = animatedBrush;
                         storyBoard.Begin(this);
                         moveFile(currentFilePath, gtargetDirectory[6] + "\\" + currentFileName);
                     }
-                    else if (e.Key == Key.NumPad8 && gtargetDirectory.Length > 7)
+                    else if ((e.Key == Key.NumPad8) || (e.Key == Key.D8) && gtargetDirectory.Length > 7)
                     {
                         Rectangle_8.Fill = animatedBrush;
                         storyBoard.Begin(this);
                         moveFile(currentFilePath, gtargetDirectory[7] + "\\" + currentFileName);
                     }
-                    else if (e.Key == Key.NumPad9 && gtargetDirectory.Length > 8)
+                    else if ((e.Key == Key.NumPad9) || (e.Key == Key.D9) && gtargetDirectory.Length > 8)
                     {
                         Rectangle_9.Fill = animatedBrush;
                         storyBoard.Begin(this);

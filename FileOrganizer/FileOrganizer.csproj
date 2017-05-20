@@ -51,10 +51,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>25F6EEEDCA9F865C187E25EA49871C1527A5E0BA</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>7B7997886FEB72DCD2DC84EAE9D774181EB46397</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>FileOrganizer_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>FileOrganizer_1_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -130,7 +130,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="FileOrganizer_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
