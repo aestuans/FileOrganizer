@@ -83,8 +83,8 @@ namespace FileOrganizer
         {
             if (File.Exists(source))
             {
-                Thread moveThread = new Thread(new ParameterizedThreadStart(deleteFileInNewThread));
-                moveThread.Start(source);
+                Thread deleteThread = new Thread(new ParameterizedThreadStart(deleteFileInNewThread));
+                deleteThread.Start();
             }
         }
         private void moveFileInNewThread(object data)
@@ -111,14 +111,16 @@ namespace FileOrganizer
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message.ToString(), "Error in moving process", MessageBoxButton.OK);
-                appStop();
+                Application.Current.Dispatcher.Invoke( new Action(() => {
+                    MessageBox.Show(Application.Current.MainWindow, e.Message.ToString(), "Error in moving process", MessageBoxButton.OK); }));
+
+                Application.Current.Dispatcher.Invoke(new Action(() => { appStop(); }));
             }
             numMoving--;
             Application.Current.Dispatcher.Invoke(
                 new Action(() => { TextBox_Copying.Text = numMoving.ToString() + " Files"; }));
         }
-        
+
         private void deleteFileInNewThread(Object data)
         {
             String source = (String)data;
@@ -128,10 +130,12 @@ namespace FileOrganizer
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message.ToString(), "Error in deleting process", MessageBoxButton.OK);
-                appStop();
+                Application.Current.Dispatcher.Invoke(new Action(() => {
+                    MessageBox.Show(Application.Current.MainWindow, e.Message.ToString(), "Error in deleting process", MessageBoxButton.OK); }));
+                Application.Current.Dispatcher.Invoke(new Action(() => { appStop(); }));
             }
         }
+
         private void onKeyDownHandler(object sender, KeyEventArgs e)
         {
             // This is to avoid moving two files unintentionally.
