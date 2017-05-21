@@ -44,8 +44,8 @@ namespace FileOrganizer
         {
             ".jpg", ".jpeg", ".gif", ".png", ".bmp", ".gifv", ".svg",
             ".mp3", ".m4a", ".ogg", ".flac", ".aac", ".wav", ".wma",
-            ".pdf", ".djv", ".djvu", ".xls", ".xlsx", ".htm", ".html", ".mht", ".mhtml", ".xhtml", ".txt", ".ppt", ".pptx", ".doc", ".docx", ".srt",
-            ".3gp", ".avi", ".divx", ".mov", ".mp4", ".mpg", ".mpeg4", ".wmv", ".flv", ".webm", ".mkv",
+            ".pdf", ".djv", ".djvu", ".xls", ".xlsx", ".htm", ".html", ".mht", ".mhtml", ".xhtml", ".txt", ".ppt", ".pptx", ".doc", ".docx", ".srt", ".epub",
+            ".3gp", ".avi", ".divx", ".mov", ".mp4", ".mpg", ".mpeg4", ".wmv", ".flv", ".webm", ".mkv", ".ts",
             ".c", ".cpp", ".py",
             ".7z", ".rar"
         };
@@ -84,7 +84,7 @@ namespace FileOrganizer
             if (File.Exists(source))
             {
                 Thread deleteThread = new Thread(new ParameterizedThreadStart(deleteFileInNewThread));
-                deleteThread.Start();
+                deleteThread.Start(source);
             }
         }
         private void moveFileInNewThread(object data)
@@ -244,7 +244,8 @@ namespace FileOrganizer
                         moveFile(currentFilePath, gtargetDirectory[8] + "\\" + currentFileName);
                     }
 
-                    FileProcessor.processDirectory();
+                    if(!isStopped)
+                        FileProcessor.processDirectory();
                 }
             }
         }
